@@ -5,12 +5,12 @@ import Row from 'react-bootstrap/esm/Row'
 import ListGroup from 'react-bootstrap/esm/ListGroup'
 import Badge from 'react-bootstrap/esm/Badge'
 import Card from 'react-bootstrap/esm/Card'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Rating from '../components/Rating'
 import Button from 'react-bootstrap/esm/Button'
 import { Helmet } from 'react-helmet-async'
 import LoadingBox from '../components/LoadingBox'
-import MessageBox from '../components/MessagBox'
+import MessageBox from '../components/MessageBox'
 import getError from '../utils'
 import { Store } from '../Store'
 
@@ -28,6 +28,7 @@ const reducer = (state, action) => {
 }
 
 const ProductScreen = () => {
+  const navigate = useNavigate()
   const params = useParams()
   const { slug } = params
 
@@ -65,6 +66,7 @@ const ProductScreen = () => {
       return
     }
     ctxDispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } })
+    navigate('/cart')
   }
 
   return loading ? (
